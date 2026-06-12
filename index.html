@@ -264,7 +264,7 @@ fetch(APPS_SCRIPT_URL, {
     <div class="form-group" style="margin-bottom:16px">
       <label>URL Google Apps Script</label>
       <div class="url-input-wrap">
-        <input type="text" id="apps-script-url" placeholder="https://script.google.com/macros/s/AKfycbwtbkzizOUNPU9Z-oPn4iH7wKgCjY5QSgSeBG_NpFznMKPZt1YmjPTgBFKL2dUUGuQrgw/exec" />
+        <input type="text" id="apps-script-url" placeholder="https://script.google.com/macros/s/AKfycbwCr5eY3DAS32G7OQ4o_fGs_EOYxa9_gLMs-jAREj83R8LtKU0Qxmoa_2FKveitxvdr/exec" />
         <button class="btn-save-url" onclick="saveScriptUrl()">Simpan</button>
       </div>
     </div>
@@ -275,6 +275,23 @@ fetch(APPS_SCRIPT_URL, {
       Hanya butuh ~10 menit dan gratis.
     </div>
     <div class="modal-actions">
+```javascript
+// Kirim ke Google Sheets
+fetch(APPS_SCRIPT_URL, {
+  method: 'POST',
+  body: JSON.stringify(rec),
+  headers: { 'Content-Type': 'text/plain' }
+})
+.then(r => r.json())
+.then(d => {
+  if (d.status === 'OK') {
+    console.log('✅ Tersimpan ke Google Sheets');
+  }
+})
+.catch(err => console.log('Gagal kirim ke Sheets:', err));
+```
+
+---
       <button class="btn-cancel" onclick="closeSettings()">Tutup</button>
       <button class="btn-save-url" onclick="testConnection()">🔗 Tes Koneksi</button>
     </div>
